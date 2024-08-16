@@ -19,4 +19,4 @@ One area of interest for me is transportation, especially for either airline or 
 * YEAR: Year flight performed
 * MONTH: Month flight performed
 * CLASS: Flight service class
-* SEATS_PER_FLIGHT: Number of seats by the flight
+* CAPACITY: Passenger fill in flight
