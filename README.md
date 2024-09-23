@@ -3,18 +3,18 @@
 [takeoff](/src/takeoff.webp)
 
 ## Table of Contents
-[Project Overview](#project-overview)
-[Original Data Dictionary](#original-data-dictionary)
-[Data Dictionary for Model](#data-dictionary-for-model)
-[Dataset](#dataset)
-[Project Organization](#project-organization)
-[Data Cleaning](#data-cleaning)
-[Exploratory Data Analysis](#eda)
-[Pre-processing](#preprocessing)
-[Modeling](#modeling)
-[Performance](#performance)
-[Conclusion/Future Steps](#conclusion--future-steps)
-[Resources](#resources)
+- [Project Overview](#project-overview)
+- [Original Data Dictionary](#original-data-dictionary)
+- [Data Dictionary for Model](#data-dictionary-for-model)
+- [Dataset](#dataset)
+- [Project Organization](#project-organization)
+    - [Data Cleaning](#data-cleaning)
+    - [Exploratory Data Analysis](#eda)
+    - [Pre-processing](#preprocessing)
+    - [Modeling](#modeling)
+    - [Performance](#performance)
+    - [Conclusion/Future Steps](#conclusion--future-steps)
+- [Resources](#resources)
 
 ## Project Overview
 One area of interest for me is transportation, especially for either airline or automotive industry. A challenge an airline could potentially face is flight and fleet logistics. If airlines can know in advance which destinations will be popular in the upcoming month, they can adjust their flight schedules and fleet maintenance to increase or decrease flights to certain destinations. With this logistical knowledge, profit can be made not only from airline ticket sales but also saving from overhead and unneeded flight maintenance. Most major airlines plan their schedule about a year in advance; therefore, this project will forecast up to a year on a monthly basis.
@@ -135,3 +135,5 @@ Until next time...have a safe flight!
 
 * [LICENSE](/LICENSE.md)
     - Project license
+
+[Back to Top](#capstone-project-take-flight)
