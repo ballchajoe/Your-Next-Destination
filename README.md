@@ -1,6 +1,6 @@
 ## **Capstone Project: Take Flight**
 =========================
-[takeoff](/src/takeoff.webp)
+![takeoff](/src/takeoff.webp)
 
 ## Table of Contents
 - [Project Overview](#project-overview)
@@ -52,26 +52,38 @@ The dataset could only be downloaded by the year so the 12 files were loaded in 
 
 ### EDA
 After the dataset was cleaned and filtered, next step was to perform some Exploratory Data Analysis (EDA). The total number of passengers over the time frame was analyzed first to get an overall view of seasonality and trend.
-[Total Passengers](/src/EDA/Total%20Passengers.png)
+
+![Total Passengers](/src/EDA/Total%20Passengers.png)
+
 An yearly seasonality with an upwards trend was seen from Jan 2013 to about Jan 2020. A huge drop in passenger volume from Dec 2019 to Apr 2020 was recorded. This was as we all know due to the COVID pandemic. It had a massive impact to the airline industry and this became a sub-focus point in the project. While the main focus of the project was to forecast passenger volume of destinations to attribute it to popularity, this anomaly in the dataset was also explored, analyzed, and evaluted later on. From Apr 2020, the recovery of the airline industry was seen and by 2022, seasonality and trend seemed to return as it was before.
 
 Since the fight data was recorded on a monthly basis and due to yearly seasonality, total number of passengers were detailed monthly for each year.
-[Monthly Passengers over the Years](/src/EDA/Total%20Passengers%20Monthly.png)
+
+![Monthly Passengers over the Years](/src/EDA/Total%20Passengers%20Monthly.png)
+
 As it was observed in the overall plot, the trend was upwards and that was evident with 2019 being on top of the stack. The impact of the pandemic was also evident with 2020 being on the bottom, then the recovery each year afterwards. The monthly pattern was the same throughout the years with passenger volume peaking in the summer season.
 
 The analysis continued focusing on the monthly basis data. Top 10 destinations each month over the years were analyzed. 
-[Monthly Top 10](/src/EDA/Monthly%20Top%2010.png)
-There were destinations that were continuously in the top 10 and their order seem to be consistent such as London, United Kingdom being on top. There were some destinations that periodically made it into the top 10. Then the lockdown due to the pandemic shuffled everything around. The ranking of top 10 changed and new destinations made it to the top 10 once or few times. However, after 2020 things seemed to return to as they were before. Plotting the destinations individually, it was observed how many destinations made it to the monthly top 10 over the years and especially which destinations benefited from the pandemic.
-[Monthly Top 10 Individually](src/EDA/Monthly%20Top%2010%20Ind.png)
+
+![Monthly Top 10](/src/EDA/Monthly%20Top%2010.png)
+
+There were destinations that were continuously in the top 10 and their order seem to be consistent such as London, United Kingdom being on top. There were some destinations that periodically made it into the top 10. Then the lockdown due to the pandemic shuffled everything around. The ranking of top 10 changed and new destinations made it to the top 10 once or few times. However, after 2020 things seemed to return to as they 
+were before. Plotting the destinations individually, it was observed how many destinations made it to the monthly top 10 over the years and especially which destinations benefited from the pandemic.
+
+![Monthly Top 10 Individually](src/EDA/Monthly%20Top%2010%20Ind.png)
 
 ### Preprocessing
 Pre-processing for this time series model included four parts: feature engineering, stationarity, differencing, and plotting the autocorrelation (ACF) and partial autocorrelation functions (PACF). 
 Feature engineering was performed to transform the dataset into an input that fit the scope of the project. As forecasting destinations was the objective, the destinations and their number of passengers became the target. From data cleaning, it was determined there were 171 different destinations. Two filters were applied to narrow down these destinations. First filter was to set a minimum number of passengers threshold by finding the monthly top 10 destination with the lowest number of passengers. Second filter was to keep the destinations with less than 12 months of data missing. This was determined from the fact that the longest cumulative lockdown during the pandemic was about 9 to 10 months. After the filtering, the destinations were narrowed down to 61.
 
 Similar to the EDA, the total number of passengers over the time frame was analyzed to get an overall idea.
-[Total Passenger Stationarity](src/Preprocessing/Total%20Passenger%20Stationarity.png)
+
+![Total Passenger Stationarity](src/Preprocessing/Total%20Passenger%20Stationarity.png)
+
 Visually inspecting the plot, it was determined that the data was non-stationary as the rolling mean and rolling standard deviation were not constant; rolling mean was increasing and rolling standard deviation had minor fluctuations. Another visual check for stationarity of a time series model is through decomposition. A time series model is composed of three parts: trend, seasonal, and residual.
-[Total Passenger Decomposition](src/Preprocessing/Total%20Passenger%20Decomp.png)
+
+![Total Passenger Decomposition](src/Preprocessing/Total%20Passenger%20Decomp.png)
+
 If the time series model shows trend (upward or downward) or the residual is not random like white noise, then it is non-stationary as was the case with the total number of passengers. This was verified through Augmented Dickey-Fuller (ADF) test. The null hypotheses for ADF is that the time series model is non-stationary and since the p-value for this model was greater than 0.05, the null hypotheses was not rejected. Therefore, it was determined differencing will be required to make it stationary. ADF test was applied to each of the 61 destinations and after 3rd order of differencing, all the data was stationary.
 
 An ARIMA model consists of three parts: auto-regressive (AR or p), integrated (I or d), and moving average (MA or q). Component *d* is determined from order of differencing, *p* from the largest lag on the ACF plot, and *q* from the largest lag on the PACF plot. SARIMA is an extension of ARIMA model with seasonality and its components are defined by the non-seasonal components (p,q,d) with seasonal components (P,Q,D,m) where m is the recurring fixed interval. The fixed interval for this model was set to 12 as the seasonality recurred yearly or 12 months. ACF and PACF were plotted for each of the 61 destinations and observed that the largest lags (other than at 0) for ACF was either at 1 or 2 and for PACF was either at 1 or 7.
@@ -96,15 +108,15 @@ Models evaluated up to 2020 yielded a narrower band of MAPE. Models evaluated wi
 ### Conclusion / Future Steps
 The models with pre-COVID dataset (2013-2020) seemed to have performed better forecasting since it yieled narrower band of MAPE. However, can or should the anomaly in the data which in this case 2020-2022 be omitted? That's two years or 24 months of missing data! Interestingly enough, 3 of the 4 models came to similar conclusion on forecasting the destinations for the next 12 months.
 
-[SARIMA](/src/Modeling/SARIMA.png)
+![SARIMA](/src/Modeling/SARIMA.png)
 
-[SARIMA pre-COVID](/src/Modeling/SARIMA%20pre%20COVID.png)
+![SARIMA pre-COVID](/src/Modeling/SARIMA%20pre%20COVID.png)
 
-[Prophet pre-COVID](/src/Modeling/Prophet%20pre%20COVID.png)
+![Prophet pre-COVID](/src/Modeling/Prophet%20pre%20COVID.png)
 
 Prophet model with the entire dataset forecasted the same destinations and more!
 
-[Prophet](/src/Modeling/Prophet.png)
+![Prophet](/src/Modeling/Prophet.png)
 
 Which goes to show that anomalies in the data shouldn't be simply ignored as it could lead to interesting discoveries.
 
